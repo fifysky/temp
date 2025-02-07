@@ -15,7 +15,7 @@ class Pipeline:
         # The identifier must be unique across all pipelines.
         # The identifier must be an alphanumeric string that can include underscores or hyphens. It cannot contain spaces, special characters, slashes, or backslashes.
         # self.id = "维基_管道"
-        self.name = "维基百科 管道"
+        self.name = "维基百科"
 
         # Initialize rate limits
         self.valves = self.Valves(**{"OPENAI_API_KEY": os.getenv("OPENAI_API_KEY", "")})
@@ -39,7 +39,7 @@ class Pipeline:
 
         if body.get("title", False):
             print("Title Generation")
-            return "维基百科 管道"
+            return "wikipedia pipeline"
         else:
             titles = []
             for query in [user_message]:
