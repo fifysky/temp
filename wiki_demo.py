@@ -35,8 +35,8 @@ class Pipeline:
     ) -> Union[str, Generator, Iterator]:
         # This is where you can add your custom pipelines like RAG.
 	proxies = {
-		'http': 'http://10.10.1.10:3128',
-		'https': 'http://10.10.1.10:1080'
+		'http': 'http://172.16.18.121:10809',
+		'https': 'http://172.16.18.121:10809'
 		}
         print(f"pipe:{__name__}")
 
@@ -48,8 +48,7 @@ class Pipeline:
             for query in [user_message]:
                 query = query.replace(" ", "_")
 
-                r = requests.get(f"https://zh.wikipedia.org/w/api.php?action=opensearch&search={query}&limit=1&namespace=0&format=json",
-		proxies=proxies
+                r = requests.get(f"https://zh.wikipedia.org/w/api.php?action=opensearch&search={query}&limit=1&namespace=0&format=json",proxies=proxies
                 )
 
                 response = r.json()
@@ -59,8 +58,7 @@ class Pipeline:
             context = None
             if len(titles) > 0:
                 r = requests.get(
-                    f"https://zh.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles={'|'.join(titles)}",
-					proxies=proxies
+                    f"https://zh.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles={'|'.join(titles)}",proxies=proxies
                 )
                 response = r.json()
                 # get extracts
