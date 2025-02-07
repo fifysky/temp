@@ -47,19 +47,14 @@ class Pipeline:
             titles = []
             for query in [user_message]:
                 query = query.replace(" ", "_")
-
-                r = requests.get(f"https://zh.wikipedia.org/w/api.php?action=opensearch&search={query}&limit=1&namespace=0&format=json",proxies=proxies
-                )
-
+                r = requests.get(f"https://zh.wikipedia.org/w/api.php?action=opensearch&search={query}&limit=1&namespace=0&format=json",proxies=proxies)
                 response = r.json()
                 titles = titles + response[1]
                 print(titles)
 
             context = None
             if len(titles) > 0:
-                r = requests.get(
-                    f"https://zh.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles={'|'.join(titles)}",proxies=proxies
-                )
+                r = requests.get(f"https://zh.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles={'|'.join(titles)}",proxies=proxies)
                 response = r.json()
                 # get extracts
                 pages = response["query"]["pages"]
