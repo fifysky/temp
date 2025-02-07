@@ -4,7 +4,7 @@ from schemas import OpenAIChatMessage
 import requests
 import os
 
-
+proxies = {'http': 'http://172.16.18.121:10809','https': 'http://172.16.18.121:10809'}
 class Pipeline:
     class Valves(BaseModel):
         pass
@@ -34,10 +34,7 @@ class Pipeline:
         self, user_message: str, model_id: str, messages: List[dict], body: dict
     ) -> Union[str, Generator, Iterator]:
         # This is where you can add your custom pipelines like RAG.
-	proxies = {
-		'http': 'http://172.16.18.121:10809',
-		'https': 'http://172.16.18.121:10809'
-		}
+
         print(f"pipe:{__name__}")
 
         if body.get("title", False):
